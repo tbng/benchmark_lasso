@@ -45,8 +45,9 @@ class Solver(BaseSolver):
         if fit_intercept:
             x_shape += n_samples
         self.var_init = np.zeros(x_shape)
+        L = np.linalg.norm(self.X, ord=2) ** 2
         if self.restart_strategy == 'greedy':
-            min_beta = 1.0
+            min_beta = 1.0 / L
             s_greedy = 1.1
             p_lazy = 1.0
             q_lazy = 1.0
